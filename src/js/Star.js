@@ -1,15 +1,12 @@
 import * as THREE from 'three'
 
-import starDiffuseSource from '../images/textures/sun.jpg'
-
 export default class Star
 {
-    constructor(_options, xPos)
-    {
-        this.textureLoader = _options.textureLoader
-        
+    constructor(xPos, yPos)
+    {        
         this.container = new THREE.Object3D()
         this.xPos = xPos
+        this.yPos = yPos
         
         this.setStar()
     }
@@ -28,7 +25,7 @@ export default class Star
                 void main() 
                 {
                     vNormal = normalize( normalMatrix * normal );
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1 );
                 }
                 `,
                 fragmentShader: 
@@ -36,8 +33,8 @@ export default class Star
                 varying vec3 vNormal;
                 void main() 
                 {
-                    float intensity = pow( 0.7 - dot( vNormal, vec3( 0.0, 0.0, 0.3 ) ), 6.0 ); 
-                    gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 ) * intensity;
+                    float intensity = pow( 0.5 - dot( vNormal, vec3( 0.0, 0.0, 0.5 ) ), 6.0 ); 
+                    gl_FragColor = vec4( 1.0, 1.3, 1.3, 1.5 ) * intensity;
                 }
                 `,
                 side: THREE.BackSide,
@@ -48,15 +45,10 @@ export default class Star
         //
         this.globe = {}
         this.globe.geometry = new THREE.SphereBufferGeometry(20, 45, 45)
-        this.globe.material = new THREE.MeshStandardMaterial({
-            map: this.textureLoader.load(starDiffuseSource),
-            metalness: 0.3, 
-            roughness: 0.8, 
-            side: THREE.DoubleSide
-        })
         this.globe.mesh = new THREE.Mesh(this.globe.geometry, customMaterial)
         this.globe.mesh.position.x = this.xPos
-        this.globe.mesh.position.z = -200
+        this.globe.mesh.position.y = this.yPos - 80
+        this.globe.mesh.position.z = -500
         this.container.add(this.globe.mesh)
     }
 }

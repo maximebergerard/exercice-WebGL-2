@@ -11,6 +11,7 @@ export default class Space
         this.container = new THREE.Object3D()
 
         this.setBackground()
+        this.setAnimation()
     }
     
     setBackground()
@@ -25,5 +26,15 @@ export default class Space
         })
         this.globe.mesh = new THREE.Mesh(this.globe.geometry, this.globe.material)
         this.container.add(this.globe.mesh)
+    }
+    setAnimation()
+    {
+        const loop = () =>
+        {
+            window.requestAnimationFrame(loop)
+
+            this.globe.mesh.rotation.y -= 0.00005
+        }
+        loop()
     }
 }
