@@ -2,8 +2,6 @@ import './css/style.styl'
 
 import * as THREE from 'three'
 
-// import lensflareTexture from './images/textures/lensflare/lensflare0.png'
-
 import Space from './js/Space.js'
 import Star from './js/Star.js'
 import Satellite from './js/Satellite.js';
@@ -22,19 +20,7 @@ directions.right = false
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-// const lensflare = new THREE.Lensflare()
 //
-
-/**
- * Lensflare
- */
-
-// const light = new THREE.PointLight( 0xffffff, 1.5, 2000 )
-
-// const textureFlare0 = textureLoader.load(lensflareTexture)
-// lensflare.addElement( new THREE.LensflareElement( textureFlare0, 512, 0 ) )
-
-// light.add( lensflare )
 
 /**
  * Sizes
@@ -161,18 +147,6 @@ function onKeyUp(e) {
 const cursor = {}
 cursor.x = sizes.width / 2
 cursor.y = sizes.height / 2
-
-// const updateRotation = (x, y) => 
-// {
-//     camera.rotateY(x * - 0.01)
-//     camera.rotateX(y * - 0.01)
-// }
-// window.addEventListener('mousemove', (_event) =>
-// {
-//     cursor.x += _event.movementX
-//     cursor.y += _event.movementY
-//     updateRotation(_event.movementX, _event.movementY)
-// })
 
 /**
  * Lights 
